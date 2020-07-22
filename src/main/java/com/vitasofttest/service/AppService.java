@@ -2,23 +2,30 @@ package com.vitasofttest.service;
 
 
 import java.util.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.stream.Collectors;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AppService {
 
   public List<String> post(List<String> strings) {
-    Map<Integer, String> map = new TreeMap<>();
-    List<String> list = new LinkedList<>();
-    for (String s : strings) {
-      map.put(s.length(), s);
+    return strings.stream().sorted(Comparator.comparingInt(String::length))
+        .map(s -> "(" + s.length() + "): " + s).collect(Collectors.toCollection(LinkedList::new));
+  }
+
+  public ResponseEntity<String> getService(String monthNumberString) {
+    int monthNumberInteger;
+    try {
+      monthNumberInteger = Integer.parseInt(monthNumberString);
+    } catch (NumberFormatException exception) {
+      return incorrectData();
     }
-    for (int i: map.keySet()) {
-      list.add("\"(" + i + "): " + map.get(i) + "\"");
+    if (monthNumberInteger < 1 || monthNumberInteger > 12) {
+      return incorrectData();
+    } else {
+      return new ResponseEntity<>(get(monthNumberInteger), HttpStatus.OK);
     }
-    return list;
   }
 
   public String get(int monthNumber) {
@@ -53,7 +60,7 @@ public class AppService {
     }
   }
 
-  public ResponseEntity<String> incorrectData() {
+  private ResponseEntity<String> incorrectData() {
     return new ResponseEntity<>("INCORRECT INPUT DATA", HttpStatus.BAD_REQUEST);
   }
 }
