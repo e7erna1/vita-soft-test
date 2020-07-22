@@ -29,7 +29,7 @@ public class AppService {
     return getMonth(monthNumberInteger);
   }
 
-  public String getMonth(int monthNumber) {
+  private String getMonth(int monthNumber) {
     return getRusName(monthNumber);
   }
 
