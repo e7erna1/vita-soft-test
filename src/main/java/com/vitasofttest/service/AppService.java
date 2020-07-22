@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 public class AppService {
 
   public List<String> sortStringService(List<String> strings) {
-    return strings.stream().sorted(Comparator.comparingInt(String::length))
-        .map(s -> "(" + s.length() + "): " + s).collect(Collectors.toCollection(LinkedList::new));
+    return strings.stream()
+        .sorted(CharSequence::compare)
+        .sorted(Comparator.comparingInt(String::length))
+        .map(s -> "(" + s.length() + "): " + s)
+        .collect(Collectors.toCollection(LinkedList::new));
   }
 
   public String getMonthService(String monthNumberString) {
