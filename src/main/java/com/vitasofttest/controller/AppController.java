@@ -14,12 +14,12 @@ public class AppController {
     this.appService = appService;
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/post")
+  @PostMapping(value = "/post")
   public ResponseEntity<List<String>> sortStringController(@RequestBody List<String> strings) {
     return new ResponseEntity<>(appService.sortStringService(strings), HttpStatus.OK);
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/get/{monthNumberString}")
+  @GetMapping(value = "/get/{monthNumberString}")
   public ResponseEntity<String> getMonthController(@PathVariable String monthNumberString) {
     return new ResponseEntity<>(appService.getMonthService(monthNumberString),
         (!appService.getMonthService(monthNumberString).equals("INCORRECT INPUT DATA")
