@@ -30,35 +30,20 @@ public class AppService {
   }
 
   private String getMonth(int monthNumber) {
-    return getRusName(monthNumber);
-  }
-
-  private String getRusName(int monthNumber) {
-    if (monthNumber == 1) {
-      return "Я-Н-В-А-Р-Ь";
-    } else if (monthNumber == 2) {
-      return "Ф-Е-В-Р-А-Л-Ь";
-    } else if (monthNumber == 3) {
-      return "М-А-Р-Т";
-    } else if (monthNumber == 4) {
-      return "А-П-Р-Е-Л-Ь";
-    } else if (monthNumber == 5) {
-      return "М-А-Й";
-    } else if (monthNumber == 6) {
-      return "И-Ю-Н-Ь";
-    } else if (monthNumber == 7) {
-      return "И-Ю-Л-Ь";
-    } else if (monthNumber == 8) {
-      return "А-В-Г-У-С-Т";
-    } else if (monthNumber == 9) {
-      return "С-Е-Н-Т-Я-Б-Р-Ь";
-    } else if (monthNumber == 10) {
-      return "О-К-Т-Я-Б-Р-Ь";
-    } else if (monthNumber == 11) {
-      return "Н-О-Я-Б-Р-Ь";
-    } else {
-      return "Д-Е-К-А-Б-Р-Ь";
-    }
+    return switch (monthNumber) {
+      case 1 -> "Я-Н-В-А-Р-Ь";
+      case 2 -> "Ф-Е-В-Р-А-Л-Ь";
+      case 3 -> "М-А-Р-Т";
+      case 4 -> "А-П-Р-Е-Л-Ь";
+      case 5 -> "М-А-Й";
+      case 6 -> "И-Ю-Н-Ь";
+      case 7 -> "И-Ю-Л-Ь";
+      case 8 -> "А-В-Г-У-С-Т";
+      case 9 -> "С-Е-Н-Т-Я-Б-Р-Ь";
+      case 10 -> "О-К-Т-Я-Б-Р-Ь";
+      case 11 -> "Н-О-Я-Б-Р-Ь";
+      default -> "Д-Е-К-А-Б-Р-Ь";
+    };
   }
 
   private String exceptionHandler(Exception e) {
