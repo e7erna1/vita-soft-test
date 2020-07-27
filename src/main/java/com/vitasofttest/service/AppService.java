@@ -17,19 +17,25 @@ public class AppService {
   }
 
   public String getMonthService(String monthNumberString) {
-    int monthNumberInteger;
+    String monthNameRus;
     try {
-      monthNumberInteger = Integer.parseInt(monthNumberString);
-      if (monthNumberInteger < 1 || monthNumberInteger > 12) {
-        throw new NumberFormatException();
-      }
+      monthNameRus = getMonthRusName(monthNumberString);
     } catch (NumberFormatException exception) {
-      return exceptionHandler(exception);
+      monthNameRus = exceptionHandler();
     }
-    return getMonth(monthNumberInteger);
+    return monthNameRus;
   }
 
-  private String getMonth(int monthNumber) {
+  private String getMonthRusName(String monthNumberString) throws NumberFormatException {
+    int monthNumberInteger = Integer.parseInt(monthNumberString);
+    if (monthNumberInteger < 1 || monthNumberInteger > 12) {
+      throw new NumberFormatException();
+    } else {
+      return monthRusNameStringFromInt(monthNumberInteger);
+    }
+  }
+
+  private String monthRusNameStringFromInt(int monthNumber) {
     return switch (monthNumber) {
       case 1 -> "Я-Н-В-А-Р-Ь";
       case 2 -> "Ф-Е-В-Р-А-Л-Ь";
@@ -46,7 +52,7 @@ public class AppService {
     };
   }
 
-  private String exceptionHandler(Exception e) {
+  private String exceptionHandler() {
     return "INCORRECT INPUT DATA";
   }
 }
