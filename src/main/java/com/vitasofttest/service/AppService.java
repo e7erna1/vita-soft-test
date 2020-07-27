@@ -36,10 +36,6 @@ public class AppService {
     if (!Pattern.matches("^([1-9]|1[012])$", monthNumberString)) {
       throw new NumberFormatException();
     }
-    int monthNumberInteger = Integer.parseInt(monthNumberString);
-    if (monthNumberInteger < 1 || monthNumberInteger > 12) {
-      throw new NumberFormatException();
-    }
   }
 
   private String monthRusNameStringFromInt(int monthNumber) {
