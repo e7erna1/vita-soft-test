@@ -26,7 +26,7 @@ public class AppService {
     return monthNameRus;
   }
 
-  private String getMonthRusName(String monthNumberString) throws NumberFormatException {
+  private String getMonthRusName(String monthNumberString) {
     int monthNumberInteger = Integer.parseInt(monthNumberString);
     if (monthNumberInteger < 1 || monthNumberInteger > 12) {
       throw new NumberFormatException();
